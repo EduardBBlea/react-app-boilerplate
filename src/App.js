@@ -1,25 +1,23 @@
-import logo from './logo.svg';
+import { BrowserRouter } from "react-router-dom";
+
+import MainLayout from "./pages/MainLayout";
+
+import { GlobalProvider } from "./contexts/GlobalContext";
+
+import useGlobalState from "./hooks/useGlobalState";
+
 import './App.css';
 
-function App() {
+const App = () => {
+  const globalState = useGlobalState();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <GlobalProvider value={globalState}>
+      <BrowserRouter>
+        <MainLayout />
+      </BrowserRouter>
+    </GlobalProvider>
+  )
 }
 
 export default App;
